@@ -1,82 +1,149 @@
 
 
 ```markdown
-# Amazon Product Scraper
+# AliExpress Product Scraper
 
-A Python-based scraper for extracting and cleaning Amazon product data using **Pandas**, **Selenium**, and **BeautifulSoup**.
+A Python-based project to scrape product details like names, prices, store names, and links from **AliExpress** using **Selenium**, **BeautifulSoup**, and **Pandas**. This project automates the data collection process and provides clean, structured data in a CSV file.
+
+---
 
 ## Features
-- Extracts product details such as names, prices, and links from Amazon.
-- Cleans and structures the data into a CSV file for easy analysis.
-- Provides a modular, reusable code structure for web scraping projects.
+- 📦 Extracts product details, including:
+  - **Product Name**
+  - **Price**
+  - **Store Name**
+  - **Store Link**
+- 🧹 Cleans and structures the data into an easy-to-use **CSV format**.
+- 🚀 Automates pagination and handles dynamic web pages.
+
+---
+
+## Technologies Used
+- **Python** 🐍
+- **Selenium**: Automates browser interactions for web scraping.
+- **BeautifulSoup**: Parses and extracts data from HTML files.
+- **Pandas**: Cleans, processes, and structures the data.
+- **CSV**: Exports the final structured data for analysis.
+
+---
 
 ## Installation
 
 ### 1. Clone this repository:
 ```bash
-git clone https://github.com/Rayyan-Prog-ML/amazon-product-scraper.git
+git clone https://github.com/yourusername/aliexpress-scraper.git
 ```
 
 ### 2. Install dependencies:
+Make sure you have Python installed, then install the required libraries:
 ```bash
 pip install -r requirements.txt
 ```
 
+---
+
 ## Usage
 
-### 1. Run the extraction script to scrape product details from Amazon:
-```bash
-python scripts/extracting_amazon.py
-```
-This will save the raw HTML files of the products in the `data/` directory.
+### 1. Run the HTML Collector Script
+Use the `Collecting_data.py` script to scrape product HTML files from AliExpress.  
+This will save the raw HTML files in the `data/` directory.
 
-### 2. Run the collection script to clean and structure the data into a CSV:
 ```bash
-python scripts/collect_Amazon.py
+python scripts/Collecting_data.py
 ```
-This will process the HTML files, extract product names, prices, and links, and save the cleaned data to `outputs/New cleaning Amazonss-Products.csv`.
+
+### 2. Run the Data Processing Script
+Use the `Putting_data.py` script to extract product details from the saved HTML files.  
+The cleaned and structured data will be saved in the `Aliexpress_Data.csv` file.
+
+```bash
+python scripts/Putting_data.py
+```
+
+---
 
 ## Example Output
 
-An example of the cleaned CSV data can be found in the `outputs/` folder, where each row contains the product name, price, and link.
+Here’s an example of the cleaned data exported to a CSV file:
 
-## Python Code Example
+| Product Name          | Price (USD) | Store Name    | Store Link                        |
+|-----------------------|-------------|---------------|-----------------------------------|
+| Laptop XYZ           | 500.00      | Store ABC     | https://aliexpress.com/store/123 |
+| Gaming Laptop Alpha  | 700.00      | Tech Store    | https://aliexpress.com/store/456 |
 
-Here’s a Python example from the `collect_Amazon.py` script:
+---
 
-```python
-# collect_Amazon.py
-"""
-Script to parse Amazon HTML files and clean data.
+## Project Workflow
 
-Requires:
-- BeautifulSoup
-- pandas
-"""
+1. **Scraping HTML**:
+   - `Aliexpress.py` uses **Selenium** to navigate AliExpress, search for products, and save the HTML files for each product.
 
-import os
-import pandas as pd
-from bs4 import BeautifulSoup
+2. **Parsing and Cleaning Data**:
+   - `collect_Aliexp.py` uses **BeautifulSoup** to parse the saved HTML files.
+   - Extracts details such as names, prices, and store information.
+   - Cleans the data with **Pandas**, including removing unnecessary characters and converting data types.
 
-def parse_html_files(data_path):
-    """Parses HTML files and extracts product data."""
-    data = {"Name": [], "Price": [], "Link": []}
-    for file in os.listdir(data_path):
-        try:
-            with open(f"{data_path}/{file}", 'r', encoding='utf-8') as f:
-                soup = BeautifulSoup(f.read(), 'html.parser')
-                # Extract details
-                title = soup.find("h2").get_text(strip=True)
-                price = soup.find("span", class_="a-price-whole").get_text(strip=True)
-                link = f"https://amazon.in{soup.find('a')['href']}"
-                data["Name"].append(title)
-                data["Price"].append(price.replace(",", ""))
-                data["Link"].append(link)
-        except Exception as e:
-            print(f"Error parsing {file}: {e}")
-    return data
+3. **CSV Export**:
+   - Final processed data is saved into a **CSV file**, ready for analysis or integration into other systems.
+
+---
+
+## File Structure
+
 ```
+aliexpress-scraper/
+├── Aliexpress/                   # Directory for storing raw HTML files
+├── outputs/                      # Directory for cleaned CSV files
+├── scripts/
+│   ├── Collecting_data.py             # Script for scraping HTML files
+│   └── Putting_data.py         # Script for parsing and cleaning data
+├── requirements.txt              # Python dependencies
+├── README.md                     # Project documentation
+```
+
+---
+
+## Requirements
+
+- Python 3.7+
+- Google Chrome and ChromeDriver (for Selenium)
+
+Install dependencies using:
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## Challenges and Learnings
+
+- 🛠 Learned to handle dynamic web pages and pagination using **Selenium**.
+- 📚 Improved HTML parsing skills with **BeautifulSoup**.
+- 🧹 Gained experience in data cleaning and processing with **Pandas**.
+
+---
+
+## Future Enhancements
+
+- Add support for scraping additional product details, like ratings and reviews.
+- Implement multi-threading for faster data collection.
+- Create a web interface for user-friendly data queries.
+
+---
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the [MIT License](LICENSE).
+
+---
+
+## Contact
+
+Feel free to connect with me on LinkedIn or explore my other projects on GitHub!
+want me to hire to assist in your projects lets connect and discuss your needs
+linkdin: [https://www.linkedin.com/in/rayyan-mustafa-0a201520b/]  
+Github:  [https://github.com/Rayyan-Prog-ML]
+📧 Email: rayyanmustafa2k456@gmail.com
 ```
+
+---
+
